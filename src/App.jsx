@@ -1,23 +1,48 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+import { useState } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import './style.css';
 
 export function App() {
+  const [todo, setTodo] = useState('');
+  const [limit, setLimit] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (newTodo, newLimit) => {
+    const newTodos = [
+      ...todos,
+      {
+        todo: newTodo,
+        limit: newLimit,
+      },
+    ];
+    setTodos(newTodos);
+    console.log(newTodos);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTodo(todo, limit);
+  };
+
   return (
-    <body className="h-screen bg-gradient-to-l from-green-500 to-green-700">
-      <header>
-        <h1 className="pt-12 text-center text-5xl text-yellow-400">TO DO APP</h1>
-      </header>
+    <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
+      <h1 className="pt-12 text-center text-5xl text-yellow-400">
+        TO DO APP <small>(React Ver)</small>
+      </h1>
 
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
-        <form id="js-form" className="flex flex-row justify-center items-end text-white">
+        <form className="flex flex-row justify-center items-end text-white">
           <label className="block grow">
             新規Todo
             <input
               type="text"
               placeholder="Todoを入力"
-              id="todo"
               className="px-2 w-full h-10 rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
               required
+              value={todo}
+              onChange={(e) => setTodo(e.target.value)}
             />
           </label>
           <label className="ml-2 block">
@@ -26,10 +51,12 @@ export function App() {
               type="date"
               className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
               required
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
             />
           </label>
 
-          <button id="submit" disabled className="min-w-fit h-10 ml-2 px-4 py-2 rounded text-m">
+          <button className="min-w-fit h-10 ml-2 px-4 py-2 rounded text-m" onClick={handleSubmit}>
             登録
           </button>
         </form>
@@ -47,34 +74,37 @@ export function App() {
         </div>
 
         <ul className="todo-list mt-8 w-full">
-          <li className="todo-item">
-            <div className="todo-div">
-              <p className="todo-todo">todo</p>
-              <div className="todo-task">
-                <p className="todo-date">
-                  期限:
-                  <span className="limit-over">期限が過ぎています！！</span>
-                </p>
-                <div>
-                  <button className="list edit-btn">
-                    <i className="pointer-events-none">
-                      <FaEdit />
-                    </i>
-                  </button>
-                  <button className="list complete-btn">
-                    <i className="pointer-events-none">
-                      <FaCheck />
-                    </i>
-                  </button>
-                  <button className="list trash-btn">
-                    <i className="pointer-events-none">
-                      <FaTrashAlt />
-                    </i>
-                  </button>
+          {todos &&
+            todos.map((list, index) => (
+              <li className="todo-item" key={list.todo}>
+                <div className="todo-div">
+                  <p className="todo-todo">{list.todo}</p>
+                  <div className="todo-task">
+                    <p className="todo-date">
+                      期限:{list.limt}
+                      <span className="limit-over">期限が過ぎています！！</span>
+                    </p>
+                    <div>
+                      <button className={`list${index} edit-btn`}>
+                        <i className="pointer-events-none">
+                          <FaEdit />
+                        </i>
+                      </button>
+                      <button className={`list${index} complete-btn`}>
+                        <i className="pointer-events-none">
+                          <FaCheck />
+                        </i>
+                      </button>
+                      <button className={`list${index} trash-btn`}>
+                        <i className="pointer-events-none">
+                          <FaTrashAlt />
+                        </i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </li>
+              </li>
+            ))}
         </ul>
       </div>
 
@@ -114,9 +144,7 @@ export function App() {
                   type="text"
                   className="px-2 w-full rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
                   required
-                >
-                  {' '}
-                </textarea>
+                />
               </label>
               <label className="mt-4 mb-2 font-semibold text-gray-700">
                 期限{' '}
@@ -138,6 +166,6 @@ export function App() {
           </form>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
