@@ -38,7 +38,7 @@ module.exports = {
       },
     ],
     'react/button-has-type': [
-      'error',
+      'off',
       {
         button: ['boolean'],
         submit: ['boolean'],

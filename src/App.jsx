@@ -1,3 +1,4 @@
+import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import './style.css';
 
 export function App() {
@@ -48,12 +49,28 @@ export function App() {
         <ul className="todo-list mt-8 w-full">
           <li className="todo-item">
             <div className="todo-div">
-              <p className="todo-todo">todoです</p>
+              <p className="todo-todo">todo</p>
               <div className="todo-task">
-                <p className="todo-date">期限 2020-01-01</p>
+                <p className="todo-date">
+                  期限:
+                  <span className="limit-over">期限が過ぎています！！</span>
+                </p>
                 <div>
-                  <button className="complete-btn">{/* <i className="fas fa-check"></i> */}</button>
-                  <button className="trash-btn">{/* <i className="fas fa-trash"></i> */}</button>
+                  <button className="list edit-btn">
+                    <i className="pointer-events-none">
+                      <FaEdit />
+                    </i>
+                  </button>
+                  <button className="list complete-btn">
+                    <i className="pointer-events-none">
+                      <FaCheck />
+                    </i>
+                  </button>
+                  <button className="list trash-btn">
+                    <i className="pointer-events-none">
+                      <FaTrashAlt />
+                    </i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -77,12 +94,14 @@ export function App() {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
-                ></path> */}
+                >
+                  {' '}
+                </path>
               </svg>
             </button>
           </div>
