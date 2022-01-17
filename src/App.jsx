@@ -5,25 +5,39 @@ import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import './style.css';
 
 export function App() {
-  const [todo, setTodo] = useState('');
+  const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
   const [todos, setTodos] = useState([]);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  function getInputDay() {
+    const now = new Date();
+    const inputDay = `${now.getFullYear()}-${
+      now.getMonth() + 1
+    }-${now.getDate()}-${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    return inputDay;
+  }
 
   const addTodo = (newTodo, newLimit) => {
+    const inputDate = getInputDay();
     const newTodos = [
       ...todos,
       {
-        todo: newTodo,
+        inputDate,
+        text: newTodo,
         limit: newLimit,
+        complete: false,
       },
     ];
     setTodos(newTodos);
-    console.log(newTodos);
+    setText('');
+    setLimit('');
+    setSubmitDisabled(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(todo, limit);
+    addTodo(text, limit);
   };
 
   return (
@@ -33,7 +47,7 @@ export function App() {
       </h1>
 
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
-        <form className="flex flex-row justify-center items-end text-white">
+        <form onSubmit={handleSubmit} className="flex flex-row justify-center items-end text-white">
           <label className="block grow">
             新規Todo
             <input
@@ -41,8 +55,11 @@ export function App() {
               placeholder="Todoを入力"
               className="px-2 w-full h-10 rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
               required
-              value={todo}
-              onChange={(e) => setTodo(e.target.value)}
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+                setSubmitDisabled(limit === '');
+              }}
             />
           </label>
           <label className="ml-2 block">
@@ -52,13 +69,19 @@ export function App() {
               className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
               required
               value={limit}
-              onChange={(e) => setLimit(e.target.value)}
+              onChange={(e) => {
+                setLimit(e.target.value);
+                setSubmitDisabled(text === '');
+              }}
             />
           </label>
 
-          <button className="min-w-fit h-10 ml-2 px-4 py-2 rounded text-m" onClick={handleSubmit}>
-            登録
-          </button>
+          <input
+            id="submit"
+            type="submit"
+            className={submitDisabled ? `submit-disabled` : `submit-enabled`}
+            value="登録"
+          />
         </form>
 
         <div className="mt-2 flex flex-row justify-end">
@@ -76,12 +99,12 @@ export function App() {
         <ul className="todo-list mt-8 w-full">
           {todos &&
             todos.map((list, index) => (
-              <li className="todo-item" key={list.todo}>
+              <li className="todo-item" key={list.inputDate}>
                 <div className="todo-div">
-                  <p className="todo-todo">{list.todo}</p>
+                  <p className="todo-todo">{list.text}</p>
                   <div className="todo-task">
                     <p className="todo-date">
-                      期限:{list.limt}
+                      期限:{list.limit}
                       <span className="limit-over">期限が過ぎています！！</span>
                     </p>
                     <div>

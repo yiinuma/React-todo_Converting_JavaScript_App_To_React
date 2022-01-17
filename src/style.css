@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 #submit {
+  @apply min-w-fit h-10 ml-2 px-4 py-2 rounded;
+}
+
+.submit-disabled {
   @apply bg-slate-300;
 }
-#submit.submit-enable {
+.submit-enabled {
   @apply bg-orange-400 hover:bg-orange-500;
 }
 
