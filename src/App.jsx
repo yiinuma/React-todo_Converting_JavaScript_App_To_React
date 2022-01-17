@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { useState } from 'react';
@@ -51,14 +50,8 @@ export function App() {
   };
 
   const handleComplete = (completeIndex) => {
-    const newTodos = todos.map((todo, handleIndex) => {
-      if (handleIndex === completeIndex) {
-        todo.complete = !todo.complete;
-      }
-      console.log(todo);
-      return todo;
-    });
-    setTodos(newTodos);
+    todos[completeIndex].complete = !todos[completeIndex].complete;
+    setTodos(todos);
   };
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
