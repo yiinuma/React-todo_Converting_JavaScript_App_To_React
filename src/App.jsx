@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { useState } from 'react';
@@ -7,7 +8,16 @@ import './style.css';
 export function App() {
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    {
+      inputDate: '2022-1-18-7:26:52',
+      text: 'やることリスト',
+      limit: '2022-01-25',
+      complete: false,
+    },
+    { inputDate: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-01-05', complete: false },
+    { inputDate: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2022-01-27', complete: false },
+  ]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   function getInputDay() {
@@ -40,6 +50,16 @@ export function App() {
     addTodo(text, limit);
   };
 
+  const handleComplete = (completeIndex) => {
+    const newTodos = todos.map((todo, handleIndex) => {
+      if (handleIndex === completeIndex) {
+        todo.complete = !todo.complete;
+      }
+      console.log(todo);
+      return todo;
+    });
+    setTodos(newTodos);
+  };
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
       <h1 className="pt-12 text-center text-5xl text-yellow-400">
@@ -113,7 +133,10 @@ export function App() {
                           <FaEdit />
                         </i>
                       </button>
-                      <button className={`list${index} complete-btn`}>
+                      <button
+                        onClick={() => handleComplete(index)}
+                        className={`list${index} complete-btn`}
+                      >
                         <i className="pointer-events-none">
                           <FaCheck />
                         </i>
