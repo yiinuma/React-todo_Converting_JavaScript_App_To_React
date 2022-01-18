@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
+import { Title } from './components/Title';
 import './style.css';
 
 export function App() {
@@ -55,9 +56,7 @@ export function App() {
   };
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
-      <h1 className="pt-12 text-center text-5xl text-yellow-400">
-        TO DO APP <small>(React Ver)</small>
-      </h1>
+      <Title />
 
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
         <form onSubmit={handleSubmit} className="flex flex-row justify-center items-end text-white">
