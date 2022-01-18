@@ -9,15 +9,16 @@ export function App() {
   const [limit, setLimit] = useState('');
   const [todos, setTodos] = useState([
     {
-      inputDate: '2022-1-18-7:26:52',
+      id: '2022-1-18-7:26:52',
       text: 'やることリスト',
       limit: '2022-01-25',
       complete: false,
     },
-    { inputDate: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-01-05', complete: false },
-    { inputDate: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2022-01-27', complete: false },
+    { id: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-01-05', complete: false },
+    { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2022-01-27', complete: false },
   ]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [modal, setModal] = useState(false);
 
   function getInputDay() {
     const now = new Date();
@@ -27,12 +28,20 @@ export function App() {
     return inputDay;
   }
 
+  function checkLimit(todoLimit) {
+    const now = new Date();
+    const formatNow = `${now.getFullYear()}-${`0${now.getMonth() + 1}`.slice(-2)}-${now.getDate()}`;
+
+    const keepTheDeliveryDate = new Date(todoLimit) - new Date(formatNow) >= 0;
+    return keepTheDeliveryDate;
+  }
+
   const addTodo = (newTodo, newLimit) => {
-    const inputDate = getInputDay();
+    const id = getInputDay();
     const newTodos = [
       ...todos,
       {
-        inputDate,
+        id,
         text: newTodo,
         limit: newLimit,
         complete: false,
@@ -49,10 +58,59 @@ export function App() {
     addTodo(text, limit);
   };
 
-  const handleComplete = (completeIndex) => {
-    todos[completeIndex].complete = !todos[completeIndex].complete;
-    setTodos(todos);
+  const handleComplete = (id) => {
+    setTodos(
+      todos.map((list) => {
+        if (id === list.id) {
+          return {
+            ...list,
+            complete: !list.complete,
+          };
+        }
+        return list;
+      }),
+    );
   };
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  function handleModal() {
+    setModal(true);
+    // const wrapper = document.querySelector('#modal');
+    // const bg = wrapper.querySelector('.modal-bg');
+    // const closeButton = wrapper.querySelector('.modal-close');
+    // const form = document.forms['js-editform'];
+    // const inputText = form.querySelector('textarea');
+    // const inputLimit = form.querySelector('input[type="date"]');
+    // const clearButton = form.querySelector('.modal-clear');
+    // const submitButton = form.querySelector('.modal-submit');
+    // bg.addEventListener('click', close);
+    // closeButton.addEventListener('click', close);
+    // clearButton.addEventListener('click', clear);
+    // submitButton.addEventListener('click', submit);
+    // inputText.value = todos[index].todo;
+    // inputLimit.value = todos[index].limit;
+    // wrapper.classList.add('is-open');
+    // function close() {
+    //   wrapper.classList.remove('is-open');
+    // }
+    // function clear() {
+    //   inputText.value = '';
+    // }
+    // function submit() {
+    //   const newTodo = {
+    //     inputDate: todos[index].inputDate,
+    //     todo: inputText.value,
+    //     limit: inputLimit.value,
+    //     complete: todos[index].complete,
+    //   };
+    //   todos.splice(index, 1, newTodo);
+    //   localStorage.setItem('todos', JSON.stringify(todos));
+    // }
+  }
+
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
       <h1 className="pt-12 text-center text-5xl text-yellow-400">
@@ -111,30 +169,35 @@ export function App() {
 
         <ul className="todo-list mt-8 w-full">
           {todos &&
-            todos.map((list, index) => (
-              <li className="todo-item" key={list.inputDate}>
+            todos.map((list) => (
+              <li
+                className={`todo-item ${list.complete ? 'completed' : ''}`}
+                key={list.id}
+                data-limit={checkLimit(list.limit)}
+              >
                 <div className="todo-div">
                   <p className="todo-todo">{list.text}</p>
                   <div className="todo-task">
                     <p className="todo-date">
                       期限:{list.limit}
-                      <span className="limit-over">期限が過ぎています！！</span>
+                      {checkLimit(list.limit) ? (
+                        ''
+                      ) : (
+                        <span className="limit-over">期限が過ぎています！！</span>
+                      )}
                     </p>
                     <div>
-                      <button className={`list${index} edit-btn`}>
+                      <button onClick={() => handleModal(list.id)} className="edit-btn">
                         <i className="pointer-events-none">
                           <FaEdit />
                         </i>
                       </button>
-                      <button
-                        onClick={() => handleComplete(index)}
-                        className={`list${index} complete-btn`}
-                      >
+                      <button onClick={() => handleComplete(list.id)} className="complete-btn">
                         <i className="pointer-events-none">
                           <FaCheck />
                         </i>
                       </button>
-                      <button className={`list${index} trash-btn`}>
+                      <button onClick={() => handleDelete(list.id)} className="trash-btn">
                         <i className="pointer-events-none">
                           <FaTrashAlt />
                         </i>
@@ -149,7 +212,9 @@ export function App() {
 
       <div
         id="modal"
-        className="transition duration-300 ease-in-out fixed top-0 left-0 opacity-0 invisible w-screen flex justify-center h-screen items-center bg-slate-500 bg-opacity-75 antialiased"
+        className={`transition duration-300 ease-in-out fixed top-0 left-0 opacity-0 invisible w-screen flex justify-center h-screen items-center bg-slate-500 bg-opacity-75 antialiased ${
+          modal ? `is-open` : ''
+        }`}
       >
         <div className="modal-bg z-10 absolute top-0 left-0 w-full h-full"> </div>
         <div className="z-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
