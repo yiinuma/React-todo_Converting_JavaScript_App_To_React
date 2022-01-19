@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 
-import { useState } from 'react';
+// import { useState } from 'react';
 
-export function Modal() {
-  // const { todoList, setTodoList, id } = props;
-  const [modal, setModal] = useState(false);
+export function Modal(props) {
+  const { todoList, setTodoList, modal, setModal, editId } = props;
 
   // function handleModal() {
   //   setModal(!modal);

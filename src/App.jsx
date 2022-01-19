@@ -20,6 +20,7 @@ export function App() {
     { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2021-01-27', complete: false },
   ]);
   const [modal, setModal] = useState(false);
+  const [editId, setEditId] = useState('');
 
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
@@ -27,10 +28,23 @@ export function App() {
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
         <Form todoList={todoList} setTodoList={setTodoList} />
         <Sort todoList={todoList} setTodoList={setTodoList} />
-        <TodoList todoList={todoList} setTodoList={setTodoList} modal={modal} setModal={setModal} />
+        <TodoList
+          todoList={todoList}
+          setTodoList={setTodoList}
+          modal={modal}
+          setModal={setModal}
+          editId={editId}
+          setEditId={setEditId}
+        />
       </div>
-      <Modal />
-      {/* <Modal todoList={todoList} setTodoList={setTodoList} modal={modal} setModal={setModal} /> */}
+      <Modal
+        todoList={todoList}
+        setTodoList={setTodoList}
+        modal={modal}
+        setModal={setModal}
+        editId={editId}
+        setEditId={setEditId}
+      />
 
       {/* <div
         id="modal"
