@@ -1,10 +1,10 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { useState } from 'react';
-import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import { Form } from './components/Form';
 import { Sort } from './components/Sort';
 import { Title } from './components/Title';
+import { TodoList } from './components/TodoList';
 import './style.css';
 
 export function App() {
@@ -19,66 +19,6 @@ export function App() {
     { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2021-01-27', complete: false },
   ]);
   const [modal, setModal] = useState(false);
-  function checkLimit(todoLimit) {
-    const now = new Date();
-    const formatNow = `${now.getFullYear()}-${`0${now.getMonth() + 1}`.slice(-2)}-${now.getDate()}`;
-
-    const keepTheDeliveryDate = new Date(todoLimit) - new Date(formatNow) >= 0;
-    return keepTheDeliveryDate;
-  }
-
-  const handleComplete = (id) => {
-    setTodoList(
-      todoList.map((list) => {
-        if (id === list.id) {
-          return {
-            ...list,
-            complete: !list.complete,
-          };
-        }
-        return list;
-      }),
-    );
-  };
-
-  const handleDelete = (id) => {
-    setTodoList(todoList.filter((todo) => todo.id !== id));
-  };
-
-  function handleModal() {
-    setModal(true);
-    // const wrapper = document.querySelector('#modal');
-    // const bg = wrapper.querySelector('.modal-bg');
-    // const closeButton = wrapper.querySelector('.modal-close');
-    // const form = document.forms['js-editform'];
-    // const inputText = form.querySelector('textarea');
-    // const inputLimit = form.querySelector('input[type="date"]');
-    // const clearButton = form.querySelector('.modal-clear');
-    // const submitButton = form.querySelector('.modal-submit');
-    // bg.addEventListener('click', close);
-    // closeButton.addEventListener('click', close);
-    // clearButton.addEventListener('click', clear);
-    // submitButton.addEventListener('click', submit);
-    // inputText.value = todos[index].todo;
-    // inputLimit.value = todos[index].limit;
-    // wrapper.classList.add('is-open');
-    // function close() {
-    //   wrapper.classList.remove('is-open');
-    // }
-    // function clear() {
-    //   inputText.value = '';
-    // }
-    // function submit() {
-    //   const newTodo = {
-    //     inputDate: todos[index].inputDate,
-    //     todo: inputText.value,
-    //     limit: inputLimit.value,
-    //     complete: todos[index].complete,
-    //   };
-    //   todos.splice(index, 1, newTodo);
-    //   localStorage.setItem('todos', JSON.stringify(todos));
-    // }
-  }
 
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
@@ -86,48 +26,7 @@ export function App() {
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
         <Form todoList={todoList} setTodoList={setTodoList} />
         <Sort todoList={todoList} setTodoList={setTodoList} />
-
-        <ul className="todo-list mt-8 w-full">
-          {todoList &&
-            todoList.map((list) => (
-              <li
-                className={`todo-item ${list.complete ? 'completed' : ''}`}
-                key={list.id}
-                data-limit={checkLimit(list.limit)}
-              >
-                <div className="todo-div">
-                  <p className="todo-todo">{list.text}</p>
-                  <div className="todo-task">
-                    <p className="todo-date">
-                      期限:{list.limit}
-                      {checkLimit(list.limit) ? (
-                        ''
-                      ) : (
-                        <span className="limit-over">期限が過ぎています！！</span>
-                      )}
-                    </p>
-                    <div>
-                      <button onClick={() => handleModal(list.id)} className="edit-btn">
-                        <i className="pointer-events-none">
-                          <FaEdit />
-                        </i>
-                      </button>
-                      <button onClick={() => handleComplete(list.id)} className="complete-btn">
-                        <i className="pointer-events-none">
-                          <FaCheck />
-                        </i>
-                      </button>
-                      <button onClick={() => handleDelete(list.id)} className="trash-btn">
-                        <i className="pointer-events-none">
-                          <FaTrashAlt />
-                        </i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ))}
-        </ul>
+        <TodoList todoList={todoList} setTodoList={setTodoList} setModal={setModal} />
       </div>
 
       <div
