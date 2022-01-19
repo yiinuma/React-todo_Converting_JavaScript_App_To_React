@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
+import { Modal } from './Modal';
 
 export function TodoList(props) {
-  const { todoList, setTodoList, setModal } = props;
+  const { todoList, setTodoList } = props;
 
   const checkLimit = (todoLimit) => {
     const now = new Date();
@@ -30,9 +31,9 @@ export function TodoList(props) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
-  function handleModal() {
-    setModal(true);
-  }
+  // function handleModal() {
+  //   setModal(!modal);
+  // }
 
   return (
     <ul className="todo-list mt-8 w-full">
@@ -55,7 +56,10 @@ export function TodoList(props) {
                   )}
                 </p>
                 <div>
-                  <button onClick={() => handleModal(list.id)} className="edit-btn">
+                  <button
+                    onClick={<Modal todoList={todoList} setTodoList={setTodoList} id={list.id} />}
+                    className="edit-btn"
+                  >
                     <i className="pointer-events-none">
                       <FaEdit />
                     </i>

@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import { Form } from './components/Form';
+import { Modal } from './components/Modal';
 import { Sort } from './components/Sort';
 import { Title } from './components/Title';
 import { TodoList } from './components/TodoList';
@@ -26,10 +27,12 @@ export function App() {
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
         <Form todoList={todoList} setTodoList={setTodoList} />
         <Sort todoList={todoList} setTodoList={setTodoList} />
-        <TodoList todoList={todoList} setTodoList={setTodoList} setModal={setModal} />
+        <TodoList todoList={todoList} setTodoList={setTodoList} modal={modal} setModal={setModal} />
       </div>
+      <Modal />
+      {/* <Modal todoList={todoList} setTodoList={setTodoList} modal={modal} setModal={setModal} /> */}
 
-      <div
+      {/* <div
         id="modal"
         className={`transition duration-300 ease-in-out fixed top-0 left-0 opacity-0 invisible w-screen flex justify-center h-screen items-center bg-slate-500 bg-opacity-75 antialiased ${
           modal ? `is-open` : ''
@@ -88,7 +91,7 @@ export function App() {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
