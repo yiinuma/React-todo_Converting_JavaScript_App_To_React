@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 import { Form } from './components/Form';
+import { Sort } from './components/Sort';
 import { Title } from './components/Title';
 import './style.css';
 
@@ -14,8 +15,8 @@ export function App() {
       limit: '2022-01-25',
       complete: false,
     },
-    { id: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-01-05', complete: false },
-    { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2022-01-27', complete: false },
+    { id: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-02-05', complete: false },
+    { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2021-01-27', complete: false },
   ]);
   const [modal, setModal] = useState(false);
   function checkLimit(todoLimit) {
@@ -84,17 +85,7 @@ export function App() {
       <Title />
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
         <Form todoList={todoList} setTodoList={setTodoList} />
-        <div className="mt-2 flex flex-row justify-end">
-          <button id="sort-date" className="mt-2 h-10 px-4 rounded bg-white hover:bg-orange-400">
-            入力順で並び替え
-          </button>
-          <button
-            id="sort-limit"
-            className="mt-2 ml-8 h-10 px-4 rounded bg-white hover:bg-orange-400"
-          >
-            期限順で並び替え
-          </button>
-        </div>
+        <Sort todoList={todoList} setTodoList={setTodoList} />
 
         <ul className="todo-list mt-8 w-full">
           {todoList &&
