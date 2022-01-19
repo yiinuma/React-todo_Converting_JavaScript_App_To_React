@@ -2,13 +2,12 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
+import { Form } from './components/Form';
 import { Title } from './components/Title';
 import './style.css';
 
 export function App() {
-  const [text, setText] = useState('');
-  const [limit, setLimit] = useState('');
-  const [todos, setTodos] = useState([
+  const [todoList, setTodoList] = useState([
     {
       id: '2022-1-18-7:26:52',
       text: 'やることリスト',
@@ -18,17 +17,7 @@ export function App() {
     { id: '2022-1-18-7:27:3', text: '雪かき', limit: '2022-01-05', complete: false },
     { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2022-01-27', complete: false },
   ]);
-  const [submitDisabled, setSubmitDisabled] = useState(true);
   const [modal, setModal] = useState(false);
-
-  function getInputDay() {
-    const now = new Date();
-    const inputDay = `${now.getFullYear()}-${
-      now.getMonth() + 1
-    }-${now.getDate()}-${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    return inputDay;
-  }
-
   function checkLimit(todoLimit) {
     const now = new Date();
     const formatNow = `${now.getFullYear()}-${`0${now.getMonth() + 1}`.slice(-2)}-${now.getDate()}`;
@@ -37,31 +26,9 @@ export function App() {
     return keepTheDeliveryDate;
   }
 
-  const addTodo = (newTodo, newLimit) => {
-    const id = getInputDay();
-    const newTodos = [
-      ...todos,
-      {
-        id,
-        text: newTodo,
-        limit: newLimit,
-        complete: false,
-      },
-    ];
-    setTodos(newTodos);
-    setText('');
-    setLimit('');
-    setSubmitDisabled(true);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addTodo(text, limit);
-  };
-
   const handleComplete = (id) => {
-    setTodos(
-      todos.map((list) => {
+    setTodoList(
+      todoList.map((list) => {
         if (id === list.id) {
           return {
             ...list,
@@ -74,7 +41,7 @@ export function App() {
   };
 
   const handleDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
   function handleModal() {
@@ -115,45 +82,8 @@ export function App() {
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
       <Title />
-
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
-        <form onSubmit={handleSubmit} className="flex flex-row justify-center items-end text-white">
-          <label className="block grow">
-            新規Todo
-            <input
-              type="text"
-              placeholder="Todoを入力"
-              className="px-2 w-full h-10 rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
-              required
-              value={text}
-              onChange={(e) => {
-                setText(e.target.value);
-                setSubmitDisabled(limit === '');
-              }}
-            />
-          </label>
-          <label className="ml-2 block">
-            期限{' '}
-            <input
-              type="date"
-              className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
-              required
-              value={limit}
-              onChange={(e) => {
-                setLimit(e.target.value);
-                setSubmitDisabled(text === '');
-              }}
-            />
-          </label>
-
-          <input
-            id="submit"
-            type="submit"
-            className={submitDisabled ? `submit-disabled` : `submit-enabled`}
-            value="登録"
-          />
-        </form>
-
+        <Form todoList={todoList} setTodoList={setTodoList} />
         <div className="mt-2 flex flex-row justify-end">
           <button id="sort-date" className="mt-2 h-10 px-4 rounded bg-white hover:bg-orange-400">
             入力順で並び替え
@@ -167,8 +97,8 @@ export function App() {
         </div>
 
         <ul className="todo-list mt-8 w-full">
-          {todos &&
-            todos.map((list) => (
+          {todoList &&
+            todoList.map((list) => (
               <li
                 className={`todo-item ${list.complete ? 'completed' : ''}`}
                 key={list.id}
