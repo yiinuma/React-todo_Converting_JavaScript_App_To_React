@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-console */
+
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
@@ -30,10 +32,13 @@ export function TodoList(props) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
-  function handleEdit(id) {
+  const handleEdit = (id) => {
+    const editItem = todoList.filter((list) => id === list.id);
+
+    console.log(editItem);
     setModal(!modal);
     setEditId(id);
-  }
+  };
 
   return (
     <ul className="todo-list mt-8 w-full">

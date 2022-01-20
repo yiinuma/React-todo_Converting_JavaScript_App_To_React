@@ -4,7 +4,7 @@
 // import { useState } from 'react';
 
 export function Modal(props) {
-  const { todoList, setTodoList, modal, setModal, editId } = props;
+  const { modal, setModal } = props;
 
   // function handleModal() {
   //   setModal(!modal);
