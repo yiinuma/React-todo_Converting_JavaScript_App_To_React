@@ -2,7 +2,7 @@
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
-  const { todoList, setTodoList, modal, setModal, setEditItem } = props;
+  const { todoList, setTodoList, modal, setModal, setEditIndex } = props;
 
   const checkLimit = (todoLimit) => {
     const now = new Date();
@@ -30,16 +30,16 @@ export function TodoList(props) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (index) => {
     // setEditItem(todoList.filter((list) => id === list.id));
-    setEditItem(id);
+    setEditIndex(index);
     setModal(!modal);
   };
 
   return (
     <ul className="todo-list mt-8 w-full">
       {todoList &&
-        todoList.map((list) => (
+        todoList.map((list, index) => (
           <li
             className={`todo-item ${list.complete ? 'completed' : ''}`}
             key={list.id}
@@ -57,7 +57,7 @@ export function TodoList(props) {
                   )}
                 </p>
                 <div>
-                  <button onClick={() => handleEdit(list.id)} className="edit-btn">
+                  <button onClick={() => handleEdit(index)} className="edit-btn">
                     <i className="pointer-events-none">
                       <FaEdit />
                     </i>

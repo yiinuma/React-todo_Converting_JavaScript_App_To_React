@@ -1,17 +1,20 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
-
 import { useEffect, useState } from 'react';
 
 export function Modal(props) {
-  const { todoList, modal, setModal, editItem } = props;
+  const { todoList, modal, setModal, editIndex } = props;
   const [editText, setEditText] = useState('');
+  const [editLimit, setEditLimit] = useState('');
+
   useEffect(() => {
-    if (editItem !== '') {
-      const setItem = todoList.filter((list) => editItem === list.id);
-      setEditText(setItem);
+    if (editIndex !== '') {
+      setEditText(todoList[editIndex].text);
+      setEditLimit(todoList[editIndex].limit);
+      // const setItem = todoList.filter((list) => editItem === list.id);
+      // setEditText(setItem);
     }
-  }, [editItem]);
+  }, [editIndex]);
 
   // const [editLimit, setEditLimit] = useState('');
 
@@ -67,6 +70,10 @@ export function Modal(props) {
             <label className="mt-4 mb-2 font-semibold text-gray-700">
               期限{' '}
               <input
+                value={editLimit}
+                onChange={(e) => {
+                  setEditLimit(e.target.value);
+                }}
                 type="date"
                 className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
                 required
