@@ -20,7 +20,7 @@ export function App() {
     { id: '2022-1-18-7:27:20', text: 'ぱんを焼く', limit: '2021-01-27', complete: false },
   ]);
   const [modal, setModal] = useState(false);
-  const [editId, setEditId] = useState('');
+  const [editItem, setEditItem] = useState('');
 
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
@@ -33,8 +33,7 @@ export function App() {
           setTodoList={setTodoList}
           modal={modal}
           setModal={setModal}
-          editId={editId}
-          setEditId={setEditId}
+          setEditItem={setEditItem}
         />
       </div>
       <Modal
@@ -42,8 +41,7 @@ export function App() {
         setTodoList={setTodoList}
         modal={modal}
         setModal={setModal}
-        editId={editId}
-        setEditId={setEditId}
+        editItem={editItem}
       />
 
       {/* <div

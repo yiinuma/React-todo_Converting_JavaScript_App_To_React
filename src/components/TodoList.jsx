@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
-  const { todoList, setTodoList, modal, setModal, setEditId } = props;
+  const { todoList, setTodoList, modal, setModal, setEditItem } = props;
 
   const checkLimit = (todoLimit) => {
     const now = new Date();
@@ -33,11 +31,9 @@ export function TodoList(props) {
   };
 
   const handleEdit = (id) => {
-    const editItem = todoList.filter((list) => id === list.id);
-
-    console.log(editItem);
+    // setEditItem(todoList.filter((list) => id === list.id));
+    setEditItem(id);
     setModal(!modal);
-    setEditId(id);
   };
 
   return (

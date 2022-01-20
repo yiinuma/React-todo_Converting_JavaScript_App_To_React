@@ -45,5 +45,7 @@ module.exports = {
         reset: ['boolean'],
       },
     ],
+
+    'no-console': 'off',
   },
 };

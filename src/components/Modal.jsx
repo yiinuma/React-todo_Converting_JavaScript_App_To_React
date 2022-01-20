@@ -1,11 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Modal(props) {
-  const { modal, setModal } = props;
+  const { todoList, modal, setModal, editItem } = props;
+  const [editText, setEditText] = useState('');
+  useEffect(() => {
+    if (editItem !== '') {
+      const setItem = todoList.filter((list) => editItem === list.id);
+      setEditText(setItem);
+    }
+  }, [editItem]);
 
+  // const [editLimit, setEditLimit] = useState('');
+
+  // console.log(todoList[1].limit);
   // function handleModal() {
   //   setModal(!modal);
   // }
@@ -45,7 +55,10 @@ export function Modal(props) {
             <label className="mb-2 font-semibold text-gray-700">
               Todo
               <textarea
-                rows="4"
+                value={editText}
+                onChange={(e) => {
+                  setEditText(e.target.value);
+                }}
                 type="text"
                 className="px-2 w-full rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
                 required
