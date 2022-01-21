@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const STORAGE_KEY = 'my-todo';
 
-function useStorage() {
+export function useStorage() {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
@@ -22,5 +22,3 @@ function useStorage() {
 
   return [todoList, putTodoList];
 }
-
-export default useStorage;

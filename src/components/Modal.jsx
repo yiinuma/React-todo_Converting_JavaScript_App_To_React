@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 
 export function Modal(props) {

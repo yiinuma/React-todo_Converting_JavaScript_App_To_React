@@ -31,7 +31,6 @@ export function TodoList(props) {
   };
 
   const handleEdit = (index) => {
-    // setEditItem(todoList.filter((list) => id === list.id));
     setEditIndex(index);
     setModal(!modal);
   };

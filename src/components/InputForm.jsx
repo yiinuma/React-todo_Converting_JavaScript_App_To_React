@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
-export function Form(props) {
+export function InputForm(props) {
   // eslint-disable-next-line react/prop-types
   const { todoList, putTodoList } = props;
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
-  function getInputDay() {
+  const getInputDay = () => {
     const now = new Date();
     const inputDay = `${now.getFullYear()}-${
       now.getMonth() + 1
     }-${now.getDate()}-${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
     return inputDay;
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
