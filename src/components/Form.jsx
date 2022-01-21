@@ -27,7 +27,7 @@ export function Form(props) {
       },
     ];
     setTodoList(newTodoList);
-    localStorage.setItem('my-todo', JSON.stringify(newTodoList));
+    localStorage.setItem('my-todo', JSON.stringify(todoList));
     setText('');
     setLimit('');
     setSubmitDisabled(true);
