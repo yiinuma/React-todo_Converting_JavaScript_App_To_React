@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 export function Modal(props) {
-  const { todoList, putTasks, modal, setModal, editIndex } = props;
+  const { todoList, putTodoList, modal, setModal, editIndex } = props;
   const [editText, setEditText] = useState('');
   const [editLimit, setEditLimit] = useState('');
 
@@ -23,7 +23,7 @@ export function Modal(props) {
       complete: todoList[editIndex].complete,
     };
     todoList.splice(editIndex, 1, newTodoList);
-    putTasks(todoList);
+    putTodoList(todoList);
     setModal(false);
   };
 

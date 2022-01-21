@@ -2,7 +2,7 @@
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
-  const { todoList, putTasks, modal, setModal, setEditIndex } = props;
+  const { todoList, putTodoList, modal, setModal, setEditIndex } = props;
 
   const checkLimit = (todoLimit) => {
     const now = new Date();
@@ -13,7 +13,7 @@ export function TodoList(props) {
   };
 
   const handleComplete = (id) => {
-    putTasks(
+    putTodoList(
       todoList.map((list) => {
         if (id === list.id) {
           return {
@@ -27,7 +27,7 @@ export function TodoList(props) {
   };
 
   const handleDelete = (id) => {
-    putTasks(todoList.filter((todo) => todo.id !== id));
+    putTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
   const handleEdit = (index) => {

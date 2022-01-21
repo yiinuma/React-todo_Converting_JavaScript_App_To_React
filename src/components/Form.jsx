@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export function Form(props) {
   // eslint-disable-next-line react/prop-types
-  const { todoList, putTasks } = props;
+  const { todoList, putTodoList } = props;
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -26,7 +26,7 @@ export function Form(props) {
         complete: false,
       },
     ];
-    putTasks(newTodoList);
+    putTodoList(newTodoList);
     setText('');
     setLimit('');
     setSubmitDisabled(true);

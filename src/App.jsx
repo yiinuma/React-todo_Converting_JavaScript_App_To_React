@@ -10,7 +10,7 @@ import useStorage from './hooks/storage';
 import './style.css';
 
 export function App() {
-  const [todoList, putTasks] = useStorage();
+  const [todoList, putTodoList] = useStorage();
 
   // const [todoList, setTodoList] = useState([
   //   {
@@ -30,11 +30,11 @@ export function App() {
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
       <Title />
       <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
-        <Form todoList={todoList} putTasks={putTasks} />
-        <Sort todoList={todoList} putTasks={putTasks} />
+        <Form todoList={todoList} putTodoList={putTodoList} />
+        <Sort todoList={todoList} putTodoList={putTodoList} />
         <TodoList
           todoList={todoList}
-          putTasks={putTasks}
+          putTodoList={putTodoList}
           modal={modal}
           setModal={setModal}
           setEditIndex={setEditIndex}
@@ -42,7 +42,7 @@ export function App() {
       </div>
       <Modal
         todoList={todoList}
-        putTasks={putTasks}
+        putTodoList={putTodoList}
         modal={modal}
         setModal={setModal}
         editIndex={editIndex}

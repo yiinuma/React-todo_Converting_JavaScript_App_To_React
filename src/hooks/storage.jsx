@@ -15,12 +15,12 @@ function useStorage() {
     }
   }, []);
 
-  const putTasks = (items) => {
+  const putTodoList = (items) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     setTodoList(items);
   };
 
-  return [todoList, putTasks];
+  return [todoList, putTodoList];
 }
 
 export default useStorage;
