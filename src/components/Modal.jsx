@@ -11,17 +11,20 @@ export function Modal(props) {
     if (editIndex !== '') {
       setEditText(todoList[editIndex].text);
       setEditLimit(todoList[editIndex].limit);
-      // const setItem = todoList.filter((list) => editItem === list.id);
-      // setEditText(setItem);
     }
   }, [editIndex]);
 
-  // const [editLimit, setEditLimit] = useState('');
-
-  // console.log(todoList[1].limit);
-  // function handleModal() {
-  //   setModal(!modal);
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTodoList = {
+      id: todoList[editIndex].id,
+      text: editText,
+      limit: editLimit,
+      complete: todoList[editIndex].complete,
+    };
+    todoList.splice(editIndex, 1, newTodoList);
+    setModal(false);
+  };
 
   return (
     <div
@@ -30,7 +33,12 @@ export function Modal(props) {
         modal ? `is-open` : ''
       }`}
     >
-      <div className="modal-bg z-10 absolute top-0 left-0 w-full h-full"> </div>
+      <input
+        onClick={() => {
+          setModal(false);
+        }}
+        className="modal-bg z-10 absolute top-0 left-0 w-full h-full opacity-0"
+      />
       <div className="z-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
         <div className="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
           <p className="font-semibold text-gray-800">Todo 編集</p>
@@ -53,7 +61,7 @@ export function Modal(props) {
             </svg>
           </button>
         </div>
-        <form id="js-editform">
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col px-6 py-5 bg-gray-50">
             <label className="mb-2 font-semibold text-gray-700">
               Todo
@@ -80,13 +88,21 @@ export function Modal(props) {
               />
             </label>
           </div>
-          <div className="flex flex-row sitems-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
-            <button className="modal-clear px-4 py-2 text-white font-semibold bg-slate-400 rounded">
-              クリア
-            </button>
-            <button className="modal-submit px-4 py-2 text-white font-semibold bg-blue-500 rounded">
-              保存
-            </button>
+          <div className="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
+            <input
+              onClick={() => {
+                setEditText('');
+              }}
+              type="button"
+              value="クリア"
+              className="px-4 py-2 text-white font-semibold bg-slate-400 rounded"
+            />
+
+            <input
+              type="submit"
+              value="保存"
+              className="px-4 py-2 text-white font-semibold bg-blue-500 rounded"
+            />
           </div>
         </form>
       </div>

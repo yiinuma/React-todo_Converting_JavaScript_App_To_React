@@ -15,14 +15,15 @@ export function Form(props) {
     return inputDay;
   }
 
-  const addTodo = (newTodo, newLimit) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const id = getInputDay();
     const newTodoList = [
       ...todoList,
       {
         id,
-        text: newTodo,
-        limit: newLimit,
+        text,
+        limit,
         complete: false,
       },
     ];
@@ -30,11 +31,6 @@ export function Form(props) {
     setText('');
     setLimit('');
     setSubmitDisabled(true);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addTodo(text, limit);
   };
 
   return (
