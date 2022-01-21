@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export function Form(props) {
   // eslint-disable-next-line react/prop-types
-  const { todoList, setTodoList } = props;
+  const { todoList, putTasks } = props;
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -26,8 +26,7 @@ export function Form(props) {
         complete: false,
       },
     ];
-    setTodoList(newTodoList);
-    localStorage.setItem('my-todo', JSON.stringify(todoList));
+    putTasks(newTodoList);
     setText('');
     setLimit('');
     setSubmitDisabled(true);

@@ -1,10 +1,10 @@
 export function Sort(props) {
   // eslint-disable-next-line react/prop-types
-  const { todoList, setTodoList } = props;
+  const { todoList, putTasks } = props;
 
   const handleSortInput = (target) => {
     const sortTodoList = [...todoList].sort((a, b) => new Date(a[target]) - new Date(b[target]));
-    setTodoList(sortTodoList);
+    putTasks(sortTodoList);
   };
 
   return (
