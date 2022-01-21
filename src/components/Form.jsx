@@ -17,17 +17,17 @@ export function Form(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = getInputDay();
     const newTodoList = [
       ...todoList,
       {
-        id,
+        id: getInputDay(),
         text,
         limit,
         complete: false,
       },
     ];
     setTodoList(newTodoList);
+    localStorage.setItem('my-todo', JSON.stringify(newTodoList));
     setText('');
     setLimit('');
     setSubmitDisabled(true);

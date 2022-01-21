@@ -38,45 +38,44 @@ export function TodoList(props) {
 
   return (
     <ul className="todo-list mt-8 w-full">
-      {todoList &&
-        todoList.map((list, index) => (
-          <li
-            className={`todo-item ${list.complete ? 'completed' : ''}`}
-            key={list.id}
-            data-limit={checkLimit(list.limit)}
-          >
-            <div className="todo-div">
-              <p className="todo-todo">{list.text}</p>
-              <div className="todo-task">
-                <p className="todo-date">
-                  期限:{list.limit}
-                  {checkLimit(list.limit) ? (
-                    ''
-                  ) : (
-                    <span className="limit-over">期限が過ぎています！！</span>
-                  )}
-                </p>
-                <div>
-                  <button onClick={() => handleEdit(index)} className="edit-btn">
-                    <i className="pointer-events-none">
-                      <FaEdit />
-                    </i>
-                  </button>
-                  <button onClick={() => handleComplete(list.id)} className="complete-btn">
-                    <i className="pointer-events-none">
-                      <FaCheck />
-                    </i>
-                  </button>
-                  <button onClick={() => handleDelete(list.id)} className="trash-btn">
-                    <i className="pointer-events-none">
-                      <FaTrashAlt />
-                    </i>
-                  </button>
-                </div>
+      {todoList.map((list, index) => (
+        <li
+          className={`todo-item ${list.complete ? 'completed' : ''}`}
+          key={list.id}
+          data-limit={checkLimit(list.limit)}
+        >
+          <div className="todo-div">
+            <p className="todo-todo">{list.text}</p>
+            <div className="todo-task">
+              <p className="todo-date">
+                期限:{list.limit}
+                {checkLimit(list.limit) ? (
+                  ''
+                ) : (
+                  <span className="limit-over">期限が過ぎています！！</span>
+                )}
+              </p>
+              <div>
+                <button onClick={() => handleEdit(index)} className="edit-btn">
+                  <i className="pointer-events-none">
+                    <FaEdit />
+                  </i>
+                </button>
+                <button onClick={() => handleComplete(list.id)} className="complete-btn">
+                  <i className="pointer-events-none">
+                    <FaCheck />
+                  </i>
+                </button>
+                <button onClick={() => handleDelete(list.id)} className="trash-btn">
+                  <i className="pointer-events-none">
+                    <FaTrashAlt />
+                  </i>
+                </button>
               </div>
             </div>
-          </li>
-        ))}
+          </div>
+        </li>
+      ))}
     </ul>
   );
 }
