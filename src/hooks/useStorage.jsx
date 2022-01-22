@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useStorage(localStorageKey) {
-  const STORAGE_KEY = localStorageKey;
+export function useStorage(STORAGE_KEY = 'my-todo') {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
