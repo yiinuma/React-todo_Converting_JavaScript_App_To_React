@@ -8,7 +8,7 @@ import { useStorage } from './hooks/useStorage';
 import './style.css';
 
 export function App() {
-  const [todoList, putTodoList] = useStorage();
+  const [todoList, putTodoList] = useStorage('my-todo');
   const [modal, setModal] = useState(false);
   const [editIndex, setEditIndex] = useState('');
 
