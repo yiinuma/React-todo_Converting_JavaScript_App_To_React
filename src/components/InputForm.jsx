@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 export function InputForm(props) {
-  // eslint-disable-next-line react/prop-types
   const { todoList, putTodoList } = props;
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');

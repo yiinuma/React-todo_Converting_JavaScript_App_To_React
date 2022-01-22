@@ -1,5 +1,4 @@
 export function Sort(props) {
-  // eslint-disable-next-line react/prop-types
   const { todoList, putTodoList } = props;
 
   const handleSortInput = (target) => {

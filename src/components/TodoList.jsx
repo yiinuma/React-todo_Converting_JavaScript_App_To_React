@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
