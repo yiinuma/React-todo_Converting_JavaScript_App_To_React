@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
 export function InputForm(props) {
@@ -7,10 +8,7 @@ export function InputForm(props) {
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const getInputDay = () => {
-    const now = new Date();
-    const inputDay = `${now.getFullYear()}-${
-      now.getMonth() + 1
-    }-${now.getDate()}-${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    const inputDay = dayjs().format('YYYY-MM-DD HH:mm:ss');
     return inputDay;
   };
 

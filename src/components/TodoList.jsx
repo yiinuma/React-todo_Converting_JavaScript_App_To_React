@@ -1,13 +1,11 @@
+import dayjs from 'dayjs';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
   const { todoList, putTodoList, modal, setModal, setEditIndex } = props;
 
   const checkLimit = (todoLimit) => {
-    const now = new Date();
-    const formatNow = `${now.getFullYear()}-${`0${now.getMonth() + 1}`.slice(-2)}-${now.getDate()}`;
-
-    const keepTheDeliveryDate = new Date(todoLimit) - new Date(formatNow) >= 0;
+    const keepTheDeliveryDate = dayjs(todoLimit).isAfter(dayjs());
     return keepTheDeliveryDate;
   };
 
