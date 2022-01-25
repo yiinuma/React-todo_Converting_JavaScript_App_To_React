@@ -28,7 +28,7 @@ export function Modal(props) {
   return (
     <div
       id="modal"
-      className={`transition duration-300 ease-in-out fixed top-0 left-0 opacity-0 invisible w-screen flex justify-center h-screen items-center bg-slate-500 bg-opacity-75 antialiased ${
+      className={`invisible fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-slate-500 bg-opacity-75 antialiased opacity-0 transition duration-300 ease-in-out ${
         modal ? `is-open` : ''
       }`}
     >
@@ -36,14 +36,14 @@ export function Modal(props) {
         onClick={() => {
           setModal(false);
         }}
-        className="modal-bg z-10 absolute top-0 left-0 w-full h-full opacity-0"
+        className="modal-bg absolute top-0 left-0 z-10 h-full w-full opacity-0"
       />
-      <div className="z-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
-        <div className="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
+      <div className="z-20 mx-auto flex w-11/12 max-w-2xl flex-col rounded-lg border border-gray-300 shadow-xl sm:w-5/6 lg:w-1/2">
+        <div className="flex flex-row justify-between rounded-tl-lg rounded-tr-lg border-b border-gray-200 bg-white p-6">
           <p className="font-semibold text-gray-800">Todo 編集</p>
           <button onClick={() => setModal(!modal)} className="modal-close">
             <svg
-              className="w-6 h-6 pointer-events-none"
+              className="pointer-events-none h-6 w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ export function Modal(props) {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col px-6 py-5 bg-gray-50">
+          <div className="flex flex-col bg-gray-50 px-6 py-5">
             <label className="mb-2 font-semibold text-gray-700">
               Todo
               <textarea
@@ -70,7 +70,7 @@ export function Modal(props) {
                   setEditText(e.target.value);
                 }}
                 type="text"
-                className="px-2 w-full rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
+                className="text-m placeholder-blueGray-300 w-full rounded border-0 px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
                 required
               />
             </label>
@@ -82,25 +82,25 @@ export function Modal(props) {
                   setEditLimit(e.target.value);
                 }}
                 type="date"
-                className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
+                className="text-m placeholder-blueGray-300 h-10 w-full rounded border-0 px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
                 required
               />
             </label>
           </div>
-          <div className="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
+          <div className="flex flex-row items-center justify-between rounded-bl-lg rounded-br-lg border-t border-gray-200 bg-white p-5">
             <input
               onClick={() => {
                 setEditText('');
               }}
               type="button"
               value="クリア"
-              className="px-4 py-2 text-white font-semibold bg-slate-400 rounded"
+              className="rounded bg-slate-400 px-4 py-2 font-semibold text-white"
             />
 
             <input
               type="submit"
               value="保存"
-              className="px-4 py-2 text-white font-semibold bg-blue-500 rounded"
+              className="rounded bg-blue-500 px-4 py-2 font-semibold text-white"
             />
           </div>
         </form>

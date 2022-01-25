@@ -15,7 +15,7 @@ export function App() {
   return (
     <div className="h-screen bg-gradient-to-l from-green-500 to-green-700">
       <Title />
-      <div className="flex flex-col justify-center mt-4 ml-auto mr-auto w-[80%]">
+      <div className="mt-4 ml-auto mr-auto flex w-[80%] flex-col justify-center">
         <InputForm todoList={todoList} putTodoList={putTodoList} />
         <Sort todoList={todoList} putTodoList={putTodoList} />
         <TodoList

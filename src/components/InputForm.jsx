@@ -30,13 +30,13 @@ export function InputForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-row justify-center items-end text-white">
+    <form onSubmit={handleSubmit} className="flex flex-row items-end justify-center text-white">
       <label className="block grow">
         新規Todo
         <input
           type="text"
           placeholder="Todoを入力"
-          className="px-2 w-full h-10 rounded text-m text-gray-600 placeholder-blueGray-300 border-0 shadow outline-none focus:outline-none focus:ring"
+          className="text-m placeholder-blueGray-300 h-10 w-full rounded border-0 px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
           required
           value={text}
           onChange={(e) => {
@@ -49,7 +49,7 @@ export function InputForm(props) {
         期限{' '}
         <input
           type="date"
-          className="px-2 w-full h-10 rounded text-m placeholder-blueGray-300 text-gray-600 border-0 shadow outline-none focus:outline-none focus:ring"
+          className="text-m placeholder-blueGray-300 h-10 w-full rounded border-0 px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
           required
           value={limit}
           onChange={(e) => {
