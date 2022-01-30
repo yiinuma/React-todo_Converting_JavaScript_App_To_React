@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import toast, { Toaster } from 'react-hot-toast';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
@@ -25,6 +26,7 @@ export function TodoList(props) {
 
   const handleDelete = (id) => {
     putTodoList(todoList.filter((todo) => todo.id !== id));
+    toast('Todoを削除しました', { icon: <FaTrashAlt /> });
   };
 
   const handleEdit = (index) => {
@@ -66,6 +68,7 @@ export function TodoList(props) {
                   <i className="pointer-events-none">
                     <FaTrashAlt />
                   </i>
+                  <Toaster position="top-right" />
                 </button>
               </div>
             </div>

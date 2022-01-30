@@ -1,8 +1,17 @@
+import toast, { Toaster } from 'react-hot-toast';
+
 export function Sort(props) {
   const { todoList, putTodoList } = props;
 
-  const handleSortInput = (target) => {
+  const handleSortInput = (target = '') => {
     const sortTodoList = [...todoList].sort((a, b) => new Date(a[target]) - new Date(b[target]));
+    let sortName;
+    if (target === 'id') {
+      sortName = '入力順';
+    } else if (target === 'limit') {
+      sortName = '期限順';
+    }
+    toast.success(`${sortName}で並び替えました`);
     putTodoList(sortTodoList);
   };
 
@@ -20,6 +29,7 @@ export function Sort(props) {
       >
         期限順で並び替え
       </button>
+      <Toaster position="top-right" />
     </div>
   );
 }

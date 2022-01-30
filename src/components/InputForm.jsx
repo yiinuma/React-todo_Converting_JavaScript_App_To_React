@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export function InputForm(props) {
   const { todoList, putTodoList } = props;
@@ -24,6 +25,7 @@ export function InputForm(props) {
       },
     ];
     putTodoList(newTodoList);
+    toast.success(`Todoを登録しました`);
     setText('');
     setLimit('');
     setSubmitDisabled(true);
@@ -49,7 +51,7 @@ export function InputForm(props) {
         期限{' '}
         <input
           type="date"
-          className="text-m placeholder-blueGray-300 h-10 w-full rounded border-0 px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
+          className="text-m placeholder-blueGray-300 h-10 w-full rounded border-0 bg-white px-2 text-gray-600 shadow outline-none focus:outline-none focus:ring"
           required
           value={limit}
           onChange={(e) => {
@@ -65,6 +67,7 @@ export function InputForm(props) {
         className={submitDisabled ? `submit-disabled` : `submit-enabled`}
         value="登録"
       />
+      <Toaster position="top-right" />
     </form>
   );
 }

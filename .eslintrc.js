@@ -7,6 +7,7 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      arrowFunctions: true, // アロー関数を有効にする
     },
     ecmaVersion: 13,
     sourceType: 'module',
