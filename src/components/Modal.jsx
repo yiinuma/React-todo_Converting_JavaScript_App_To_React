@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export function Modal(props) {
   const { todoList, putTodoList, modal, setModal, editIndex } = props;
@@ -22,6 +23,7 @@ export function Modal(props) {
     };
     todoList.splice(editIndex, 1, newTodoList);
     putTodoList(todoList);
+    toast.success(`Todoを変更しました`);
     setModal(false);
   };
 
@@ -102,6 +104,7 @@ export function Modal(props) {
               value="保存"
               className="rounded bg-blue-500 px-4 py-2 font-semibold text-white"
             />
+            <Toaster position="top-right" />
           </div>
         </form>
       </div>
