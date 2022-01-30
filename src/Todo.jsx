@@ -4,7 +4,7 @@ import { Modal } from './components/Modal';
 import { Sort } from './components/Sort';
 import { Title } from './components/Title';
 import { TodoList } from './components/TodoList';
-import { Header } from './Header';
+import { Header } from './components/Header';
 import { useStorage } from './hooks/useStorage';
 import './style.css';
 
