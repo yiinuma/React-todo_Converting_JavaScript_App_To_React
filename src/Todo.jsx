@@ -34,6 +34,7 @@ export function Todo() {
         modal={modal}
         setModal={setModal}
         editIndex={editIndex}
+        setEditIndex={setEditIndex}
       />
     </div>
   );
