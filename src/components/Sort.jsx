@@ -1,4 +1,4 @@
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export function Sort(props) {
   const { todoList, putTodoList } = props;
@@ -29,7 +29,6 @@ export function Sort(props) {
       >
         期限順で並び替え
       </button>
-      <Toaster position="top-right" />
     </div>
   );
 }

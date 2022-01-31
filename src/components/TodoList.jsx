@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
 export function TodoList(props) {
@@ -68,7 +68,6 @@ export function TodoList(props) {
                   <i className="pointer-events-none">
                     <FaTrashAlt />
                   </i>
-                  <Toaster position="top-right" />
                 </button>
               </div>
             </div>

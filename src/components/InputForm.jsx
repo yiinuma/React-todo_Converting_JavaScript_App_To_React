@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export function InputForm(props) {
   const { todoList, putTodoList } = props;
@@ -67,7 +67,6 @@ export function InputForm(props) {
         className={submitDisabled ? `submit-disabled` : `submit-enabled`}
         value="登録"
       />
-      <Toaster position="top-right" />
     </form>
   );
 }

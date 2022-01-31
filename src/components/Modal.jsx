@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export function Modal(props) {
-  const { todoList, putTodoList, modal, setModal, editIndex } = props;
+  const { todoList, putTodoList, modal, setModal, editIndex, setEditIndex } = props;
   const [editText, setEditText] = useState('');
   const [editLimit, setEditLimit] = useState('');
 
@@ -12,6 +12,13 @@ export function Modal(props) {
       setEditLimit(todoList[editIndex].limit);
     }
   }, [editIndex]);
+
+  const editClear = () => {
+    setModal(false);
+    setEditText('');
+    setEditLimit('');
+    setEditIndex('');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +31,7 @@ export function Modal(props) {
     todoList.splice(editIndex, 1, newTodoList);
     putTodoList(todoList);
     toast.success(`Todoを変更しました`);
-    setModal(false);
+    editClear();
   };
 
   return (
@@ -35,15 +42,13 @@ export function Modal(props) {
       }`}
     >
       <input
-        onClick={() => {
-          setModal(false);
-        }}
+        onClick={editClear}
         className="modal-bg absolute top-0 left-0 z-10 h-full w-full opacity-0"
       />
       <div className="z-20 mx-auto flex w-11/12 max-w-2xl flex-col rounded-lg border border-gray-300 shadow-xl sm:w-5/6 lg:w-1/2">
         <div className="flex flex-row justify-between rounded-tl-lg rounded-tr-lg border-b border-gray-200 bg-white p-6">
           <p className="font-semibold text-gray-800">Todo 編集</p>
-          <button onClick={() => setModal(!modal)} className="modal-close">
+          <button onClick={editClear} className="modal-close">
             <svg
               className="pointer-events-none h-6 w-6"
               fill="none"
