@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { InputForm } from './components/InputForm';
 import { Modal } from './components/Modal';
 import { Sort } from './components/Sort';
@@ -8,7 +8,7 @@ import { Header } from './components/Header';
 import { useStorage } from './hooks/useStorage';
 import './style.css';
 
-export function Todo() {
+export const Todo = memo(() => {
   const [todoList, putTodoList] = useStorage();
   const [modal, setModal] = useState(false);
   const [editIndex, setEditIndex] = useState('');
@@ -38,4 +38,4 @@ export function Todo() {
       />
     </div>
   );
-}
+});

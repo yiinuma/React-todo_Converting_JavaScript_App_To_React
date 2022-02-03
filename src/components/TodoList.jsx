@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
+import { memo } from 'react';
 import toast from 'react-hot-toast';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
 
-export function TodoList(props) {
+export const TodoList = memo((props) => {
   const { todoList, putTodoList, modal, setModal, setEditIndex } = props;
 
   const checkLimit = (todoLimit) => {
@@ -76,4 +77,4 @@ export function TodoList(props) {
       ))}
     </ul>
   );
-}
+});
