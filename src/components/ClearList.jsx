@@ -10,7 +10,7 @@ export const ClearList = memo((props) => {
         本当に削除しますか？
         <input
           type="button"
-          value="削除"
+          value="削除!"
           className="ml-2 cursor-pointer rounded bg-red-300 bg-white px-4 py-2 font-bold"
           onClick={() => toast.dismiss(clearTodoList())}
         />
