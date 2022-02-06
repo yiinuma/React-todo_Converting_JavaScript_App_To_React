@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-export function Modal(props) {
+export const Modal = memo((props) => {
   const { todoList, putTodoList, modal, setModal, editIndex, setEditIndex } = props;
   const [editText, setEditText] = useState('');
   const [editLimit, setEditLimit] = useState('');
@@ -115,4 +115,4 @@ export function Modal(props) {
       </div>
     </div>
   );
-}
+});

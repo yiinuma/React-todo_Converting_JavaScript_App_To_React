@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import toast from 'react-hot-toast';
 
-export function Sort(props) {
+export const Sort = memo((props) => {
   const { todoList, putTodoList } = props;
 
   const handleSortInput = (target = '') => {
@@ -31,4 +32,4 @@ export function Sort(props) {
       </button>
     </div>
   );
-}
+});

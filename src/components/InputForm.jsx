@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import toast from 'react-hot-toast';
 
-export function InputForm(props) {
+export const InputForm = memo((props) => {
   const { todoList, putTodoList } = props;
   const [text, setText] = useState('');
   const [limit, setLimit] = useState('');
@@ -69,4 +69,4 @@ export function InputForm(props) {
       />
     </form>
   );
-}
+});
