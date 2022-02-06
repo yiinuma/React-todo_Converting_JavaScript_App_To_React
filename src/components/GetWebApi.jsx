@@ -6,11 +6,6 @@ import toast from 'react-hot-toast';
 export const GetWebApi = memo((props) => {
   const { putTodoList, todoList } = props;
 
-  const getInputDay = () => {
-    const inputDay = dayjs().format('YYYY-MM-DD HH:mm:ss');
-    return inputDay;
-  };
-
   const getLimitDay = () => {
     const limitDay = dayjs().format('YYYY-MM-DD');
     return limitDay;
@@ -22,7 +17,7 @@ export const GetWebApi = memo((props) => {
       .then((res) => {
         const newArray = [...res.data];
         const newTodoList = newArray.map((list) => ({
-          id: getInputDay() + list.id,
+          id: list.id,
           text: list.title,
           limit: getLimitDay(),
           complete: list.completed,
