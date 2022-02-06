@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { InputForm } from './components/InputForm';
 import { GetWebApi } from './components/GetWebApi';
+import { ClearList } from './components/ClearList';
 import { Modal } from './components/Modal';
 import { Sort } from './components/Sort';
 import { Title } from './components/Title';
@@ -10,16 +11,19 @@ import { useStorage } from './hooks/useStorage';
 import './style.css';
 
 export const Todo = memo(() => {
-  const [todoList, putTodoList] = useStorage();
+  const [todoList, putTodoList, clearTodoList] = useStorage();
   const [modal, setModal] = useState(false);
   const [editIndex, setEditIndex] = useState('');
 
   return (
-    <div className="v-min-screen h-screen bg-gradient-to-l from-green-500 to-green-700 pt-4 pl-4">
+    <div className="min-h-screen bg-gradient-to-l from-green-500 to-green-700 pt-4 pl-4">
       <Header />
       <Title />
       <div className="mt-4 ml-auto mr-auto flex w-[80%] flex-col justify-center">
-        <GetWebApi todoList={todoList} putTodoList={putTodoList} />
+        <div className="my-4 flex justify-end gap-4">
+          <GetWebApi todoList={todoList} putTodoList={putTodoList} />
+          <ClearList todoList={todoList} clearTodoList={clearTodoList} />
+        </div>
         <InputForm todoList={todoList} putTodoList={putTodoList} />
         <Sort todoList={todoList} putTodoList={putTodoList} />
         <TodoList

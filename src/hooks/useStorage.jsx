@@ -18,5 +18,10 @@ export function useStorage(STORAGE_KEY = 'my-todo') {
     setTodoList(items);
   };
 
-  return [todoList, putTodoList];
+  const clearTodoList = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+    setTodoList([]);
+  };
+
+  return [todoList, putTodoList, clearTodoList];
 }

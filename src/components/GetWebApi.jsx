@@ -6,6 +6,11 @@ import toast from 'react-hot-toast';
 export const GetWebApi = memo((props) => {
   const { putTodoList, todoList } = props;
 
+  const getInputDay = () => {
+    const inputDay = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    return inputDay;
+  };
+
   const getLimitDay = () => {
     const limitDay = dayjs().format('YYYY-MM-DD');
     return limitDay;
@@ -15,10 +20,9 @@ export const GetWebApi = memo((props) => {
     axios
       .get('https://jsonplaceholder.typicode.com/todos?userId=1')
       .then((res) => {
-        console.log(res.data);
         const newArray = [...res.data];
         const newTodoList = newArray.map((list) => ({
-          id: list.id,
+          id: getInputDay() + list.id,
           text: list.title,
           limit: getLimitDay(),
           complete: list.completed,
@@ -32,13 +36,14 @@ export const GetWebApi = memo((props) => {
       });
   };
   return (
-    <div className="mb-8 flex flex-row justify-end">
-      <input
-        type="button"
-        value="jsonplaceholderからuserデータを取得"
-        onClick={getUserData}
-        className="mt-2 h-10 rounded bg-white px-4 hover:bg-orange-400"
-      />
-    </div>
+    <input
+      type="button"
+      value="jsonplaceholderからuserデータを取得"
+      disabled={todoList.length}
+      onClick={getUserData}
+      className={`hover:bg-orange-400" mt-2 h-10 cursor-pointer rounded bg-white px-4 ${
+        todoList.length && 'cursor-not-allowed text-slate-400'
+      }`}
+    />
   );
 });
