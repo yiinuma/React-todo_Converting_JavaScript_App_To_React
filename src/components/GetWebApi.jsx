@@ -1,12 +1,15 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useGetUserData } from '../hooks/useGetUserData';
 
 export const GetWebApi = memo((props) => {
   const { putTodoList, todoList } = props;
   const [userData, getUserData] = useGetUserData();
 
-  const handleGetUserData = () => {
+  useEffect(() => {
     getUserData();
+  }, [getUserData]);
+
+  const handleGetUserData = () => {
     const newUserData = userData;
     putTodoList(...todoList, newUserData);
   };
