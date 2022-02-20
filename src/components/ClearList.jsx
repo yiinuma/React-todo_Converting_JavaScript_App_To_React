@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import toast from 'react-hot-toast';
+import { ApiButton } from './button/ApiButton';
 
 export const ClearList = memo((props) => {
   const { todoList, clearTodoList } = props;
@@ -11,7 +12,7 @@ export const ClearList = memo((props) => {
         <input
           type="button"
           value="削除"
-          className="ml-2 cursor-pointer rounded bg-red-200 bg-white px-4 py-2 font-bold"
+          className="ml-2 cursor-pointer rounded bg-red-300 bg-white px-4 py-2 font-bold"
           onClick={() => toast.dismiss(clearTodoList())}
         />
       </span>
@@ -19,14 +20,8 @@ export const ClearList = memo((props) => {
   };
 
   return (
-    <input
-      type="button"
-      value="全てのTodoListを削除"
-      disabled={!todoList.length}
-      onClick={onClickClearTask}
-      className={`hover:bg-orange-400" mt-2 h-10 cursor-pointer rounded bg-white px-4 ${
-        !todoList.length && 'cursor-not-allowed text-slate-400'
-      }`}
-    />
+    <ApiButton disabled={!todoList.length} onClick={onClickClearTask}>
+      全てのTodoListを削除
+    </ApiButton>
   );
 });

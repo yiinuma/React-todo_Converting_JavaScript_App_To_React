@@ -1,10 +1,16 @@
 import dayjs from 'dayjs';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
+import { useSetRecoilState } from 'recoil';
+import { ModalContext } from './provider/ModalProvider';
+import { editIndexState } from './store/editIndexState';
 
 export const TodoList = memo((props) => {
-  const { todoList, putTodoList, modal, setModal, setEditIndex } = props;
+  const { todoList, putTodoList } = props;
+
+  const { modal, setModal } = useContext(ModalContext);
+  const setEditIndex = useSetRecoilState(editIndexState);
 
   const checkLimit = (todoLimit) => {
     const keepTheDeliveryDate = dayjs(todoLimit).isAfter(dayjs());

@@ -1,10 +1,15 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { useRecoilState } from 'recoil';
+import { ModalContext } from './provider/ModalProvider';
+import { editIndexState } from './store/editIndexState';
 
 export const Modal = memo((props) => {
-  const { todoList, putTodoList, modal, setModal, editIndex, setEditIndex } = props;
+  const { todoList, putTodoList } = props;
   const [editText, setEditText] = useState('');
   const [editLimit, setEditLimit] = useState('');
+  const { modal, setModal } = useContext(ModalContext);
+  const [editIndex, setEditIndex] = useRecoilState(editIndexState);
 
   useEffect(() => {
     if (editIndex !== '') {
