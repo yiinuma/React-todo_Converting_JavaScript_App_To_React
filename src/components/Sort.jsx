@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import toast from 'react-hot-toast';
+import { PrimaryButton } from './button/PrimaryButton';
 
 export const Sort = memo((props) => {
   const { todoList, putTodoList } = props;
@@ -18,18 +19,12 @@ export const Sort = memo((props) => {
 
   return (
     <div className="mt-2 flex flex-row justify-end">
-      <button
-        onClick={() => handleSortInput('id')}
-        className="mt-2 h-10 rounded bg-white px-4 hover:bg-orange-400"
-      >
+      <PrimaryButton onClick={handleSortInput} target="id">
         入力順で並び替え
-      </button>
-      <button
-        onClick={() => handleSortInput('limit')}
-        className="mt-2 ml-8 h-10 rounded bg-white px-4 hover:bg-orange-400"
-      >
+      </PrimaryButton>
+      <PrimaryButton onClick={handleSortInput} target="limit">
         期限順で並び替え
-      </button>
+      </PrimaryButton>
     </div>
   );
 });
