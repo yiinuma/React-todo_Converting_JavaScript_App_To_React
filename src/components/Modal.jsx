@@ -1,10 +1,12 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { ModalContext } from './provider/ModalProvider';
 
 export const Modal = memo((props) => {
-  const { todoList, putTodoList, modal, setModal, editIndex, setEditIndex } = props;
+  const { todoList, putTodoList, editIndex, setEditIndex } = props;
   const [editText, setEditText] = useState('');
   const [editLimit, setEditLimit] = useState('');
+  const { modal, setModal } = useContext(ModalContext);
 
   useEffect(() => {
     if (editIndex !== '') {
