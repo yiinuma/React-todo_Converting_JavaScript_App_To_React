@@ -19,12 +19,8 @@ export const Sort = memo((props) => {
 
   return (
     <div className="mt-2 flex flex-row justify-end">
-      <PrimaryButton onClick={handleSortInput} target="id">
-        入力順で並び替え
-      </PrimaryButton>
-      <PrimaryButton onClick={handleSortInput} target="limit">
-        期限順で並び替え
-      </PrimaryButton>
+      <PrimaryButton onClick={() => handleSortInput('id')}>入力順で並び替え</PrimaryButton>
+      <PrimaryButton onClick={() => handleSortInput('limit')}>期限順で並び替え</PrimaryButton>
     </div>
   );
 });
